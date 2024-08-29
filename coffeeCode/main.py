@@ -1,6 +1,6 @@
 from mfrc522 import SimpleMFRC522
 import database
-import coffeeCode.mail as mail
+import ledaction
 
 reader = SimpleMFRC522() 
 
@@ -10,11 +10,11 @@ def readNFC():
     uid = reader.read()
     check = database.checkData(uid)
     if(check):
-        # green led blinks 1 time
+        ledaction.blinkOnce(False, True, False)
         database.addCoffee(uid)
     else:
-        # green and red led blinks 3 times (green on, green off, red on, red off, ...)
-        mail.sendMailToAdmin(uid)
+        ledaction.blinkThreeTimes(True, True, True)
+        # mail.sendMailToAdmin(uid)
         database.Registration(uid)
 
 while(True):

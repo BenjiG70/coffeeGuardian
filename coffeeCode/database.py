@@ -1,8 +1,5 @@
 import sqlite3
 import datetime
-# Coffee(user,time)
-# User(uid, surname, name, mail, coffee_count)
-# Registration(uid, time)
 
 connection = sqlite3.connect('coffeeguardian.db')
 cursor = sqlite3.Cursor(connection)
@@ -77,7 +74,6 @@ def Registration(uid:str, date=datetime.datetime.now()):
 
     cursor.execute(sql, (uid, date_str))
     connection.commit()
-
 
 def resetCoffee(uid:str):
     sql="""
