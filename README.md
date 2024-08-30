@@ -1,9 +1,13 @@
 # coffeeGurdian
 
-## 
+### Versionlog
+Version 1.0 Release: ?? 
+- Features
+    - Lorem Ipsum
+- Bugs
+    - Lorem Ipsum
 
 ### BOM
-
 | Pieces | Part | alternative| 
 | -------- | ------- | -------|
 | 1x |RaspberryPi Zero with wireless | NodeMCU |
@@ -18,3 +22,7 @@
 | 2 | LAN ports | |
 | 2 | LAN connector | |
 | 4 | LAN cap | |
+
+### Wiring
+![image](CoffeeGurdian_Breadboard.png)
+*Green = Data wires, red = 3,3V wire, black = ground
