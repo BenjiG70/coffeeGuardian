@@ -4,6 +4,7 @@ import datetime
 connection = sqlite3.connect('coffeeguardian.db')
 cursor = sqlite3.Cursor(connection)
 
+#
 def builddatabase():
     
     sql="""
