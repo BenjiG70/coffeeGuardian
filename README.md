@@ -1,4 +1,4 @@
-# coffeeGurdian
+# coffeeGuardian
 
 ### For who is the repo?
 
