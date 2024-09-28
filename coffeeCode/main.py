@@ -9,6 +9,7 @@ def readNFC():
     check = bool
     uid = reader.read()
     check = database.checkData(uid)
+    print("check: ", check, "UID: ", uid)
     if(check):
         ledaction.blinkOnce(False, True, False)
         database.addCoffee(uid)
