@@ -10,11 +10,15 @@ def read():
     id = reader.read()
     return id
 
+    GPIO.cleanup()
+
 def readAuth():
     # scan card, get uid and auth (written on card)
     id, text = reader.read()
 
     return "to be defined"
+    
+    GPIO.cleanup()
 
 def write(writeval:str):
     print("Wait for NFC Card...")

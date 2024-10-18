@@ -10,5 +10,5 @@ def check():
     return check
 
 while(True):
-    nfc.read()
+    print(nfc.read())
     nfc.writeauth()
