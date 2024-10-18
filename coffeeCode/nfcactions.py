@@ -6,19 +6,20 @@ reader = SimpleMFRC522()
 def read():
     print("Wait for NFC Card...")
 
-    # scan card, get uid
-    id = reader.read()
-    return id
-
+    # scan card, get uid and auth
+    id, text= reader.read()
+    #return the id
+    #clean the pins
     GPIO.cleanup()
+    return id
+    
 
 def readAuth():
     # scan card, get uid and auth (written on card)
     id, text = reader.read()
-
+    GPIO.cleanup()
     return "to be defined"
     
-    GPIO.cleanup()
 
 def write(writeval:str):
     print("Wait for NFC Card...")
