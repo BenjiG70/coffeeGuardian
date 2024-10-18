@@ -28,7 +28,7 @@ def write(writeval:str):
     GPIO.cleanup()
 
 def writeauth(auth:bool=False):
-    reader.readid()
+    reader.read_id()
     reader.write("auth:", auth)
     print(f"written: {auth}")
     GPIO.cleanup()
