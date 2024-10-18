@@ -2,7 +2,7 @@ import database as db
 import ledaction as led
 import nfcactions as nfc
 import mail
-
+import RPi.GPIO as GPIO
 # to be defined
 def check():
     check = bool
@@ -10,5 +10,9 @@ def check():
     return check
 
 while(True):
-    print(nfc.read())
-    nfc.writeauth()
+    try:
+        print(nfc.read())
+        nfc.writeauth()
+
+    finally:
+        GPIO.cleanup()
