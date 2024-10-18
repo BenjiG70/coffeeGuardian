@@ -1,23 +1,14 @@
-from mfrc522 import SimpleMFRC522
-import database
-import ledaction
+import database as db
+import ledaction as led
+import nfcactions as nfc
+import mail
 
-reader = SimpleMFRC522() 
-
-def readNFC():
-    
+# to be defined
+def check():
     check = bool
-    uid = reader.read()
-    check = database.checkData(uid)
-    print("check: ", check, "UID: ", uid)
-    if(check):
-        ledaction.blinkOnce(False, True, False)
-        database.addCoffee(uid)
-    else:
-        ledaction.blinkThreeTimes(True, True, True)
-        # mail.sendMailToAdmin(uid)
-        database.Registration(uid)
+    check = True 
+    return check
 
 while(True):
-    readNFC()
-
+    nfc.read()
+    nfc.writeauth()
