@@ -1,5 +1,6 @@
-
+## import librarys
 from mfrc522 import SimpleMFRC522
+from datetime import datetime
 
 reader = SimpleMFRC522()
 
@@ -15,8 +16,12 @@ def read():
 
 def readAuth():
     # scan card, get uid and auth (written on card)
-    id, text = reader.read()
-    return "to be defined"
+    id, auth = reader.read()
+    return auth
+
+def readIdAndAuth():
+    id, auth = reader.read()
+    return id, auth
     
 
 def write(writeval:str):
@@ -29,7 +34,7 @@ def write(writeval:str):
     print(f"written: {writeval}")
     
 
-def writeauth(auth:bool=False):
+def writeauth(auth:str):
     reader.read_id()
     reader.write("auth: " + str(auth))
     print(f"written: {auth}")
