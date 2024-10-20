@@ -19,7 +19,7 @@ def builddatabase():
     sql="""
         CREATE TABLE IF NOT EXISTS 
         USER(
-        UID TEXT PRIMARY KEY,
+        UID NUMBER PRIMARY KEY,
         REGISTERED_SINCE DATETIME
         SURNAME TEXT,
         NAME TEXT,
@@ -33,7 +33,7 @@ def builddatabase():
         CREATE TABLE IF NOT EXISTS 
         COFFEE(
         ID NUMBER PRIMARY KEY,
-        UID TEXT,
+        UID NUMBER,
         TIME DATETIME,
         FOREIGN KEY (UID) REFERENCES USER(UID)
         )
@@ -43,7 +43,7 @@ def builddatabase():
         CREATE TABLE IF NOT EXISTS 
         LOG(
         ID NUMBER PRIMARY KEY,
-        TagID TEXT,
+        TagID NUMBER,
         TIME DATETIME,
         STATUS BOOLEAN
         )
