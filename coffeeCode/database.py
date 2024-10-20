@@ -1,6 +1,6 @@
 ## import extra files
-# import ledaction as led
-# import nfcactions as nfc
+import ledaction as led
+import nfcactions as nfc
 
 ## import librarys
 import sqlite3
