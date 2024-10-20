@@ -58,7 +58,8 @@ def checkUser(uid:str):
         return True
     else:
         return False
-    
+
+## check if auth on card is correct
 def checkAuth(uid:str, authToken:str):
     sql="""
         SELECT ID FROM LOG WHERE TagID = ? AND TIME = ?
@@ -69,7 +70,6 @@ def checkAuth(uid:str, authToken:str):
         return True
     else:
         return False
-
 
 ## add coffee to user in coffee table
 def addCoffee(uid:str, date=datetime.now()):

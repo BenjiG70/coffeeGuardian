@@ -1,0 +1,14 @@
+.main{
+    grid-column: 1;
+}
+.charts{
+    grid-column: 30;
+    display: -webkit-flex;
+    display: flex;
+}
+.buttons{
+    grid-column: 2;
+}
+#welcome{
+    text-align: center;
+}
