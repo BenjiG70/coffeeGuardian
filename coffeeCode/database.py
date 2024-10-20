@@ -97,13 +97,11 @@ def writeLog(uid:str, status:bool, current_time:datetime):
 
 ## get maximum ID from given table
 def getMaxID(table:str):
-    sql="""
-        SELECT MAX(ID) FROM ?
-    """
-    cursor.execute(sql, (table,))
-    response = cursor.fetchall()
+    sql = f"SELECT MAX(id) FROM {table}"
+    cursor.execute(sql)
+    result = cursor.fetchone()
     
-    return response
+    return result[0] if result[0] is not None else 0
 
 ## get all unregistered cards from logs
 def unregisteredUser():
