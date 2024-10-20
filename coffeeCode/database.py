@@ -10,12 +10,14 @@ import os
 current_dir = os.path.dirname(__file__)
 db_path = os.path.join(current_dir, '../database/coffeeguardian.sqlite')
 
-connection = sqlite3.connect(db_path)
-cursor = sqlite3.Cursor(connection)
+def connect():
+    connection = sqlite3.connect(db_path)
+    cursor = sqlite3.Cursor(connection)
+    return connection, cursor
 
 ## init tables if they doesn´t exists already
 def builddatabase():
-    
+    connection, cursor = connect()
     sql="""
         CREATE TABLE IF NOT EXISTS 
         USER(
@@ -50,14 +52,16 @@ def builddatabase():
     """
     cursor.execute(sql)
     connection.commit()
-
+    connection.close()
 ## check if user is registered
 def checkUser(uid:str):
+    connection, cursor = connect()
     sql="""
         SELECT * FROM USER WHERE UID = ?
     """
     cursor.execute(sql, (uid,))
     response = cursor.fetchall()
+    connection.close()
     if(response != []):
         return True
     else:
@@ -65,11 +69,13 @@ def checkUser(uid:str):
 
 ## check if auth on card is correct
 def checkAuth(uid:str, authToken:str):
+    connection, cursor = connect()
     sql="""
         SELECT ID FROM LOG WHERE TagID = ? AND TIME = ?
     """
     cursor.execute(sql,(uid, authToken))
     response = cursor.fetchall()
+    connection.close()
     if(response != []):
         return True
     else:
@@ -77,6 +83,7 @@ def checkAuth(uid:str, authToken:str):
 
 ## add coffee to user in coffee table
 def addCoffee(uid:str, date=datetime.now()):
+    connection, cursor = connect()
     sql="""
         INSERT INTO COFFEE(UID,TIME)
         VALUES(?, ?)
@@ -85,26 +92,29 @@ def addCoffee(uid:str, date=datetime.now()):
 
     cursor.execute(sql, (uid, date_str))
     connection.commit()
-
+    connection.close()
 ## write every input with tagID, time and status
 def writeLog(uid:str, status:bool, current_time:datetime):
+    connection, cursor = connect()
     l_id = getMaxID("LOG") +1 
     sql="""
         INSERT INTO LOG(ID, TagID, TIME, STATUS) VALUES(?,?,?,?)
     """
     cursor.execute(sql,(l_id, uid, current_time, status))
     connection.commit()
-
+    connection.close()
 ## get maximum ID from given table
 def getMaxID(table:str):
+    connection, cursor = connect()
     sql = f"SELECT MAX(id) FROM {table}"
     cursor.execute(sql)
     result = cursor.fetchone()
-    
+    connection.close()
     return result[0] if result[0] is not None else 0
 
 ## get all unregistered cards from logs
 def unregisteredUser():
+    connection, cursor = connect()
     sql="""
         SELECT l.* 
         FROM LOG l
@@ -112,20 +122,23 @@ def unregisteredUser():
     """
     cursor.execute(sql)
     response = cursor.fetchall()
-    
+    connection.close()
     return response
 
 ## add user 
 def addUser(uid:str, name:str, surname:str, email:str, coffee_count=0):
+    connection, cursor = connect()
     sql="""
         INSERT INTO USER(UID, NAME, SURNAME, MAIL, COFFEE_COUNT) 
         VALUES(?, ?, ?, ?, ?);
     """
     cursor.execute(sql, (uid, name, surname, email, coffee_count,))
     connection.commit()
+    connection.close()
 
 ## add coffee-credit by defined amount
 def addCrediByUID(uid:str, amount:float):
+    connection, cursor = connect()
     sql="""
         UPDATE USER
         SET CREDIT = CREDIT + ?
@@ -133,8 +146,10 @@ def addCrediByUID(uid:str, amount:float):
     """
     cursor.execute(sql, (amount, uid,))
     connection.commit()
+    connection.close()
 
 def addCreditByMail(mail:str, amount:float):
+    connection, cursor = connect()
     sql="""
         UPDATE USER
         SET CREDIT = CREDIT + ?
@@ -142,8 +157,10 @@ def addCreditByMail(mail:str, amount:float):
     """
     cursor.execute(sql, (amount, mail,))
     connection.commit()
+    connection.close()
 ## remove / subtract coffee-credit by defined amount
 def rmCrediByUID(uid:str, amount:float):
+    connection, cursor = connect()
     sql="""
         UPDATE USER
         SET CREDIT = CREDIT - ?
@@ -151,8 +168,10 @@ def rmCrediByUID(uid:str, amount:float):
     """
     cursor.execute(sql, (amount, uid,))
     connection.commit()
+    connection.close()
 
 def rmCreditByMail(mail:str, amount:float):
+    connection, cursor = connect()
     sql="""
         UPDATE USER
         SET CREDIT = CREDIT - ?
@@ -160,6 +179,7 @@ def rmCreditByMail(mail:str, amount:float):
     """
     cursor.execute(sql, (amount, mail,))
     connection.commit()
+    connection.close()
 
 def cardOnReader(uid:str, authToken:str):
     check = checkUser(uid)
@@ -174,9 +194,10 @@ def cardOnReader(uid:str, authToken:str):
     else:
         led.invalid()
     
-    connection.close()
+    # connection.close()
 ## functions for statistics
 def getAlltimeDataUser(uid:str):
+    connection, cursor = connect()
     sql="""
         SELECT * FROM COFFEE WHERE UID = ?
     """
@@ -189,6 +210,7 @@ def getAlltimeDataUser(uid:str):
         return "[ERROR|404]: no data found"
 
 def getLastMonthDataUser(uid:str):
+    connection, cursor = connect()
     current_datetime = datetime.now()
     first = current_datetime.replace(day=1)
     current_datetime_str = current_datetime.isoformat()
@@ -206,6 +228,7 @@ def getLastMonthDataUser(uid:str):
     
     
 def getAlltimeData():
+    connection, cursor = connect()
     sql="""
         SELECT * FROM COFFEE
     """
@@ -219,6 +242,7 @@ def getAlltimeData():
     
 
 def getLastMonthData():
+    connection, cursor = connect()
     current_datetime = datetime.now()
     first = current_datetime.replace(day=1)
     current_datetime_str = current_datetime.isoformat()
