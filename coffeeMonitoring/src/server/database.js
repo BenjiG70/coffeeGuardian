@@ -9,8 +9,19 @@ const port = 4202;
 app.use(cors());
 app.use(bodyParser.json());
 
-// connect to database
-const db = new sqlite3.Database('../../../database/coffeeguardian.sqlite');
+const path = require('path');
+
+// Construct the absolute path to the database file
+const dbPath = path.join(__dirname, '../../../database/coffeeguardian.sqlite');
+
+// Open the database
+const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+        console.error("Error opening database:", err.message);
+    } else {
+        console.log("Connected to the SQLite database.");
+    }
+});
 
 /**
  * 
