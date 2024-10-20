@@ -6,7 +6,7 @@ import nfcactions as nfc
 import sqlite3
 from datetime import datetime
 
-connection = sqlite3.connect('coffeeguardian.db')
+connection = sqlite3.connect('coffeeguardian.sqlite')
 cursor = sqlite3.Cursor(connection)
 
 ## init tables if they doesn´t exists already

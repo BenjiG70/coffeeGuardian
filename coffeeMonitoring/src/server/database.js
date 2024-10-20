@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // connect to database
-const db = new sqlite3.Database('coffeeguardian.db');
+const db = new sqlite3.Database('coffeeguardian.sqlite');
 
 /**
  * 
