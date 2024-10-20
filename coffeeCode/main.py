@@ -6,6 +6,8 @@ import mail
 ## import librarys
 import RPi.GPIO as GPIO
 
+db.builddatabase()
+
 try:
     while(True):
             uid, auth = nfc.readIdAndAuth()
