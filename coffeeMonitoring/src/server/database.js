@@ -62,12 +62,12 @@ app.get('/get/all/user', (req, res) => {
 );
 
 app.get('/get/all/coffee', (req, res) => {
-    const sql = `SELECT * FROM USER`;
+    const sql = `SELECT * FROM COFFEE`;
     getData(sql, res);
     }
   );
-app.get('/get/actual/coffee', (req, res) => {
-    const sql = `SELECT * FROM USER`;
+app.get('/get/actual/log', (req, res) => {
+    const sql = `SELECT * FROM LOG`;
     getData(sql, res);
     }
   );
