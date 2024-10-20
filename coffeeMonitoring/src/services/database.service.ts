@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { apiData } from '../datatypes/database_interaction'
+import { apiDataCof, apiDataLog, apiDataUser } from '../datatypes/database_interaction'
 
 
 @Injectable({
@@ -15,27 +15,29 @@ export class DatabaseService {
   /**
    * Ruft alle Sensordaten von der API ab.
    */
-  getAllUsers(): Observable<apiData> {
-    return this.http.get<apiData>(`${this.apiUrl}/get/all/user`);
+  getAllUsers(): Observable<apiDataUser> {
+    return this.http.get<apiDataUser>(`${this.apiUrl}/get/all/user`);
   }
-
-  getAllCoffee(): Observable<apiData> {
-    return this.http.get<apiData>(`${this.apiUrl}/get/all/coffee`);
+  getAllLogs(): Observable<apiDataLog> {
+    return this.http.get<apiDataLog>(`${this.apiUrl}/get/all/log`);
   }
-  getActualCoffee(): Observable<apiData> {
-    return this.http.get<apiData>(`${this.apiUrl}/get/actual/coffee`);
+  getAllCoffee(): Observable<apiDataCof> {
+    return this.http.get<apiDataCof>(`${this.apiUrl}/get/all/coffee`);
   }
-  getWeeklyCoffee(): Observable<apiData> {
-    return this.http.get<apiData>(`${this.apiUrl}/get/week/coffee`);
+  getActualCoffee(): Observable<apiDataCof> {
+    return this.http.get<apiDataCof>(`${this.apiUrl}/get/actual/coffee`);
   }
-  getYearCoffee(): Observable<apiData> {
-    return this.http.get<apiData>(`${this.apiUrl}/get/yearly/coffee`);
+  getWeeklyCoffee(): Observable<apiDataCof> {
+    return this.http.get<apiDataCof>(`${this.apiUrl}/get/week/coffee`);
   }
-  getYearRegisteredUser(): Observable<apiData> {
-    return this.http.get<apiData>(`${this.apiUrl}/get/yearly_registered/user`);
+  getYearCoffee(): Observable<apiDataCof> {
+    return this.http.get<apiDataCof>(`${this.apiUrl}/get/yearly/coffee`);
   }
-  getUnregisteredUser(): Observable<apiData> {
-    return this.http.get<apiData>(`${this.apiUrl}/get/unregistered/user`);
+  getYearRegisteredUser(): Observable<apiDataUser> {
+    return this.http.get<apiDataUser>(`${this.apiUrl}/get/yearly_registered/user`);
+  }
+  getUnregisteredUser(): Observable<apiDataUser> {
+    return this.http.get<apiDataUser>(`${this.apiUrl}/get/unregistered/user`);
   }
 
   updateCredit(data:any): Observable<any> {

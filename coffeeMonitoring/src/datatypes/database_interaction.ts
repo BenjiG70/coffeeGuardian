@@ -1,12 +1,12 @@
 export interface coffeeData {
   ID:number;
   UID:string;
-  TIME:Date;
+  TIME:string;
 }
 
 export interface userData {
   UID:string;
-  REGISTERED_SINCE:Date;
+  REGISTERED_SINCE:string;
   SURNAME:string;
   NAME:string;
   MAIL:string;
@@ -17,10 +17,16 @@ export interface userData {
 export interface logData {
   ID:number;
   TagID:string;
-  TIME:Date;
+  TIME:string;
   STATUS:boolean;
 }
 
-export interface apiData {
-  [key:string]: coffeeData | userData | logData;
+export interface apiDataCof {
+  [key:string]: coffeeData;
+}
+export interface apiDataUser {
+  [key:string]: userData;
+}
+export interface apiDataLog {
+  [key:string]: logData;
 }
