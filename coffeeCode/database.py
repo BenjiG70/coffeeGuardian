@@ -225,5 +225,3 @@ def getLastMonthData():
         return response
     else:
         return "[ERROR|404]: no data found"
-
-connection.close()
