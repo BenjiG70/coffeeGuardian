@@ -1,3 +1,4 @@
 
 *cheatsheet*
-*.db
+*.sqlite
+*test*.py

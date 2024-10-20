@@ -1,12 +1,16 @@
 ## import extra files
-import ledaction as led
-import nfcactions as nfc
+# import ledaction as led
+# import nfcactions as nfc
 
 ## import librarys
 import sqlite3
 from datetime import datetime
+import os
 
-connection = sqlite3.connect('coffeeguardian.sqlite')
+current_dir = os.path.dirname(__file__)
+db_path = os.path.join(current_dir, '../database/coffeeguardian.sqlite')
+
+connection = sqlite3.connect(db_path)
 cursor = sqlite3.Cursor(connection)
 
 ## init tables if they doesn´t exists already
