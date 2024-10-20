@@ -174,6 +174,7 @@ def cardOnReader(uid:str, authToken:str):
     else:
         led.invalid()
     
+    connection.close()
 ## functions for statistics
 def getAlltimeDataUser(uid:str):
     sql="""
@@ -181,6 +182,7 @@ def getAlltimeDataUser(uid:str):
     """
     cursor.execute(sql, (uid,))
     response = cursor.fetchall()
+    connection.close()
     if(response != []):
         return response
     else:
@@ -196,10 +198,12 @@ def getLastMonthDataUser(uid:str):
     """
     cursor.execute(sql, (uid, first_str, current_datetime_str))
     response = cursor.fetchall()
+    connection.close()
     if(response != []):
         return response
     else:
         return "[ERROR|404]: no data found"
+    
     
 def getAlltimeData():
     sql="""
@@ -207,10 +211,12 @@ def getAlltimeData():
     """
     cursor.execute(sql)
     response = cursor.fetchall()
+    connection.close()
     if(response != []):
         return response
     else:
         return "[ERROR|404]: no data found"
+    
 
 def getLastMonthData():
     current_datetime = datetime.now()
@@ -223,9 +229,10 @@ def getLastMonthData():
     """
     cursor.execute(sql, (first_str, current_datetime_str))
     response = cursor.fetchall()
+    connection.close()
     if(response != []):
         return response
     else:
         return "[ERROR|404]: no data found"
     
-connection.close()
+    
