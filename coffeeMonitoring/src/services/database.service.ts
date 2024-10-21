@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { apiDataCof, apiDataLog, apiDataUser } from '../datatypes/database_interaction'
+import { apiDataCof, apiDataLog, apiDataUser, generalLogStats } from '../datatypes/database_interaction'
 
 
 @Injectable({
@@ -45,5 +45,9 @@ export class DatabaseService {
   }
   updateUser(data:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/update/credit`, data);
+  }
+
+  getYearLogStats():Observable<generalLogStats> {
+    return this.http.get<generalLogStats>(`${this.apiUrl}/get/yearly/log`);
   }
 }

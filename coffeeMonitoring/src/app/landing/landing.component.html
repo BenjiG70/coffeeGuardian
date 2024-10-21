@@ -5,9 +5,9 @@
         <button> Navigate to add credit</button>
     </div>
 </div>
-
+<p> test {{logdata}}</p>
 <div class="charts">
-    <app-chartcard [title]="'New registered users by month'" [labels]="labels_year" [options]="options_bar" [data]="data" [style]="'line'"></app-chartcard>
+    <app-chartcard [title]="'New registered users by month'" [labels]="labels_year" [options]="options_bar" [data]="logdata" [style]="'line'"></app-chartcard>
     <app-chartcard [title]="'Coffee consume by month'" [labels]="labels_year" [options]="options_bar" [data]="data" [style]="'line'"></app-chartcard>
     <app-chartcard [title]="'Coffee consume by week'" [labels]="labels_workweek" [options]="options_bar" [data]="data" [style]="'line'"></app-chartcard>
     <app-chartcard [title]="'Coffee consume at actual date'" [labels]="labels_hours" [options]="options_bar" [data]="data" [style]="'line'"></app-chartcard>

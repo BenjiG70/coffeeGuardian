@@ -13,13 +13,21 @@ export class ChartcardComponent {
   @Input() title:string = "undefined";
   @Input() style:'bar' | 'line' | 'scatter' | 'bubble' | 'pie' | 'doughnut' | 'polarArea' | 'radar' = 'bar';
   @Input() options:any;
-  @Input() labels:any;
-  @Input() data:any;
-  @Input() chartColor:any;
+  @Input() labels:string[]=[];
+  @Input() data:number[]=[];
+  @Input() chartColor:string="#424242";
 
   src: any;
 
   ngOnInit() {
+    this.updateChart();
+  }
+  ngOnChanges() {
+    // Jedes Mal, wenn sich ein Input wie "data" ändert, wird das Diagramm aktualisiert
+    this.updateChart();
+  }
+
+  updateChart() {
     this.src = {
       labels: this.labels,
       datasets: [

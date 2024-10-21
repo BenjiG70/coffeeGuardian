@@ -101,6 +101,25 @@ app.get('/get/yearly/coffee', (req, res) => {
     getData(sql, res);
     }
   )
+  //get/yearly/log
+  app.get('/get/monthly/log', (req, res) => {
+    const sql = `SELECT SUM(STATUS) 
+                FROM LOG 
+                WHERE strftime('%Y', TIME) = strftime('%Y', 'now')
+                GROUP BY strftime('%m', TIME)
+                ORDER BY strftime('%m', TIME);
+                `;
+    getData(sql, res);
+    }
+  )
+  app.get('/get/yearly/log', (req, res) => {
+    const sql = `SELECT SUM(STATUS) AS VALUE
+                FROM LOG 
+                WHERE strftime('%Y', TIME) = strftime('%Y', 'now')
+                `;
+    getData(sql, res);
+    }
+  )
 
 app.listen(port, () => {    
   console.log(`Server läuft auf http://localhost:${port}`);
