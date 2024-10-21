@@ -53,7 +53,20 @@ export class UserComponent implements OnInit{
         this.registration.REGISTERED_SINCE=new Date().toLocaleString();
       }
       console.log('Benutzerdaten:', this.registration);
-      this.db.insertUser(this.registration);
+      this.db.insertUser(this.registration).subscribe(
+        response => {
+          console.log('Benutzer erfolgreich eingefügt:', response);
+          // Füge hier eine Benachrichtigung oder Erfolgsmeldung hinzu
+          alert('Benutzer erfolgreich eingefügt');
+          // Optional: Formular zurücksetzen
+          // this.resetForm();
+        },
+        error => {
+          console.error('Fehler beim Einfügen des Benutzers:', error);
+          // Füge hier Fehlerbehandlung hinzu
+          alert('Fehler beim Einfügen des Benutzers');
+        }
+      );
+    }
 
   }
-}

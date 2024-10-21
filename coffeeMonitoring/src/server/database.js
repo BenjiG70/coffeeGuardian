@@ -150,7 +150,7 @@ app.get('/get/yearly/coffee', (req, res) => {
     const { UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT } = req.body;
     console.log(UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT)
     const sql = `
-                INSERT INTO users (UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT) 
+                INSERT INTO USER (UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)
                 `;
 
