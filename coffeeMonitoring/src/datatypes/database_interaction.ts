@@ -34,6 +34,9 @@ export interface newUserLogStats {
   [key:number]: number; //month (1-12): value 
 }
 export interface generalLogStats {
-  Status:number;
-  VALUE:number;
+  STATUS: number; 
+  VALUE: number;
+}
+export interface apiDataGLS {
+  [key:number]: generalLogStats;
 }

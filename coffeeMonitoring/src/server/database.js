@@ -121,7 +121,16 @@ app.get('/get/yearly/coffee', (req, res) => {
     getData(sql, res);
     }
   )
+  ///get/unregistered/user
 
+  app.get('/get/unregistered/user', (req, res) => {
+    const sql = `SELECT DISTINCT(TagID), TIME
+                 FROM LOG l
+                 LEFT JOIN USER u ON l.TagID = u.UID
+                `;
+    getData(sql, res);
+    }
+  )
 app.listen(port, () => {    
   console.log(`Server läuft auf http://localhost:${port}`);
   }

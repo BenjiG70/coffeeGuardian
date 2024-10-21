@@ -20,6 +20,8 @@ export class ChartcardComponent {
   src: any;
 
   ngOnInit() {
+    console.log(this.labels);
+    console.log(this.data);
     this.updateChart();
   }
   ngOnChanges() {

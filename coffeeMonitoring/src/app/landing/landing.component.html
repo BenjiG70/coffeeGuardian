@@ -1,14 +1,15 @@
 <div class="main">
     <span id="welcome"> Hey User!</span>
     <div class="buttons">
-        <button> Navigate to user registration</button>
-        <button> Navigate to add credit</button>
+        <button (click)="redirectToPage('user')"> Navigate to user registration</button>
+        <button (click)="redirectToPage('credit')"> Navigate to add credit</button>
     </div>
 </div>
-<p> test {{logdata}}</p>
+<p> test {{testval}}</p>
 <div class="charts">
     <app-chartcard [title]="'New registered users by month'" [labels]="labels_year" [options]="options_bar" [data]="logdata" [style]="'line'"></app-chartcard>
     <app-chartcard [title]="'Coffee consume by month'" [labels]="labels_year" [options]="options_bar" [data]="data" [style]="'line'"></app-chartcard>
     <app-chartcard [title]="'Coffee consume by week'" [labels]="labels_workweek" [options]="options_bar" [data]="data" [style]="'line'"></app-chartcard>
     <app-chartcard [title]="'Coffee consume at actual date'" [labels]="labels_hours" [options]="options_bar" [data]="data" [style]="'line'"></app-chartcard>
+    <app-chartcard [title]="'(in)valid logs'" [labels]="testlab" [options]="" [data]="testval" [style]="'pie'"></app-chartcard>
 </div>

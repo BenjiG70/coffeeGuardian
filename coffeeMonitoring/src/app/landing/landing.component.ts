@@ -1,7 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ChartcardComponent } from '../chartcard/chartcard.component';
 import { DatabaseService } from '../../services/database.service';
-import { apiDataCof, apiDataLog, apiDataUser } from '../../datatypes/database_interaction';
+import { MatDialog } from '@angular/material/dialog';
+import { apiDataCof, apiDataGLS, apiDataLog, apiDataUser } from '../../datatypes/database_interaction';
+import { UserComponent } from '../user/user.component';
+import { CreditComponent } from '../credit/credit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -12,7 +16,9 @@ import { apiDataCof, apiDataLog, apiDataUser } from '../../datatypes/database_in
 })
 export class LandingComponent implements OnInit {
 
-  constructor(private db: DatabaseService, private cdr: ChangeDetectorRef) {}
+
+  //public dialog: MatDialo
+  constructor(private db: DatabaseService, private cdr: ChangeDetectorRef, private router:Router) {}
 
   labels_year = ['January', 'February', 'March', 'April', 'May', 'Juni', 'July', 'August', 'September', 'October', 'November', 'Dezember'];
   labels_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -42,6 +48,22 @@ export class LandingComponent implements OnInit {
     return arr;
     // console.log("after log");
   }
+  logStats(data:apiDataGLS){
+    let arr:any[]=[];
+    let arr2:any[]=[];
+    for(let i = 0; i < Object.keys(data).length; i++){
+      console.log(i);
+      if(data[i].STATUS == 0){
+        arr.push("invalid");
+      }else{
+        arr.push("valid");
+      }
+      // arr.push(data[i].STATUS.toString());
+      arr2.push(data[i].VALUE);
+    }
+    // console.log(arr, arr2)
+    return [arr, arr2]
+  }
 
   processingUserData(data:apiDataUser){
     console.log("tbd")
@@ -49,9 +71,17 @@ export class LandingComponent implements OnInit {
   processingCoffeeData(data:apiDataCof){
     console.log("tbd")
   }
-
-
+  public testlab:any[]=[];
+  public testval:any[]=[];
+  logstatic:any[] = [];
   ngOnInit() {
+    this.db.getYearLogStats().subscribe({
+      next: (data) => {
+        [this.testlab, this.testval] = this.logStats(data) ;
+        // console.log(this.testlab, this.testval)
+      }
+    })
+    
     // Fetch logs and write them in logdata to get nice stats
     this.db.getAllLogs().subscribe({
       next: (data) => {
@@ -59,5 +89,11 @@ export class LandingComponent implements OnInit {
         this.logdata = this.logStatsDataProcessing(data);
       }
     });
+    this.cdr.detectChanges();
   }
+
+  redirectToPage(page:string){
+    this.router.navigate(['/', page]);
+  }
+
 }
