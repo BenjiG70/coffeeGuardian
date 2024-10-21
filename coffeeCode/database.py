@@ -22,7 +22,7 @@ def builddatabase():
         CREATE TABLE IF NOT EXISTS 
         USER(
         UID NUMBER PRIMARY KEY,
-        REGISTERED_SINCE DATETIME
+        REGISTERED_SINCE DATETIME,
         SURNAME TEXT,
         NAME TEXT,
         MAIL TEXT,
