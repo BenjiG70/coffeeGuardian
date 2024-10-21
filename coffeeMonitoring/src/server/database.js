@@ -121,7 +121,7 @@ app.get('/get/yearly/coffee', (req, res) => {
     getData(sql, res);
     }
   )
-  ///get/unregistered/user
+
 
   app.get('/get/unregistered/user', (req, res) => {
     const sql = `SELECT l.TagID, MAX(l.TIME) as TIME
@@ -132,6 +132,24 @@ app.get('/get/yearly/coffee', (req, res) => {
     getData(sql, res);
     }
   )
+
+  app.post('/update/user', (req, res) => {
+
+    const sql = `UPDATE USER
+                 SET 
+                `;
+    getData(sql, res);
+    }
+  )
+  app.post('/insert/user', (req, res) => {
+    const { UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT } = req.body;
+    const sql = `
+                INSERT INTO users (UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                `;
+    changeData(sql, [UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT], res);
+});
+
 app.listen(port, () => {    
   console.log(`Server läuft auf http://localhost:${port}`);
   }

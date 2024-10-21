@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
 import { apiDataLog, apiDataUser, userData } from '../../datatypes/database_interaction';
 
@@ -11,16 +11,18 @@ import { apiDataLog, apiDataUser, userData } from '../../datatypes/database_inte
 })
 export class UserCardVerticalComponent implements OnInit{
 
-  constructor(private db:DatabaseService) {}
+  @Input() TagID:string = "";
+  @Input() Time:string="";
 
-  unregistered:apiDataLog={};
   ngOnInit(): void {
-    this.db.getUnregisteredUser().subscribe({
-      next: (data) => {
-        this.unregistered = data;
-        console.log(data);
-      }
-    });
+      this.Time = this.timeformatting(this.Time);
   }
-  
+
+  timeformatting(time:string){
+    let formattedTime:string;
+    let temp = new Date(time);
+    formattedTime = temp.toLocaleString();
+    return formattedTime
+  }
+
 }
