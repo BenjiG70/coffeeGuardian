@@ -29,6 +29,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
  * @param {*} res 
  */
 function getData(sql, res) {
+  console.log(sql)
   db.all(sql, [], (err, rows) => {
     if (err) {
       res.status(400).send(err.message);
