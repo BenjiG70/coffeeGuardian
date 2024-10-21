@@ -47,6 +47,7 @@ export class DatabaseService {
     return this.http.post<any>(`${this.apiUrl}/update/user`, data);
   }
   insertUser(data: userData): Observable<any> {
+    console.log(data)
     return this.http.post<any>(`${this.apiUrl}/insert/user`, data);
   }
   getYearLogStats():Observable<apiDataGLS> {

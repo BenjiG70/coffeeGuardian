@@ -49,9 +49,11 @@ function getData(sql, res) {
  * @param {*} res 
  */
 function changeData(sql, res){
+  console.log(sql)
   db.run(sql, [], (err, rows) => {
       if (err) {
         res.status(400).send(err.message);
+        console.log(err.message)
         return;
       }
       const result = {};
@@ -61,6 +63,7 @@ function changeData(sql, res){
       res.status(200).json(result);
     }
   );
+  console.log(res)
 }
 
 /**
@@ -143,6 +146,7 @@ app.get('/get/yearly/coffee', (req, res) => {
   )
   app.post('/insert/user', (req, res) => {
     const { UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT } = req.body;
+    console.log(UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT)
     const sql = `
                 INSERT INTO users (UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)
