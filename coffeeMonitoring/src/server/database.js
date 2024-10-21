@@ -152,8 +152,19 @@ app.get('/get/yearly/coffee', (req, res) => {
                 INSERT INTO users (UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)
                 `;
-    changeData(sql, [UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT], res);
-});
+
+                db.run(sql, [UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT,], function (err) {
+                  if (err) {
+                    // Wenn ein Fehler auftritt, sende die Antwort und kehre zurück, um den Rest der Logik zu stoppen
+                    return res.status(500).json({ error: "Datenbankfehler: " + err.message });
+                  }
+              
+                  // Wenn die Einfügung erfolgreich ist, sende die Antwort nur einmal
+                  res.status(200).json({ message: 'Daten erfolgreich eingefügt', id: this.lastID });
+                });
+              });
+//     changeData(sql, [UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT], res);
+// });
 
 app.listen(port, () => {    
   console.log(`Server läuft auf http://localhost:${port}`);
