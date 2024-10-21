@@ -146,6 +146,7 @@ app.get('/get/yearly/coffee', (req, res) => {
     }
   )
   app.post('/insert/user', (req, res) => {
+    console.log("in insert!")
     const { UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT } = req.body;
     console.log(UID, REGISTERED_SINCE, SURNAME, NAME, MAIL, CREDIT, COFFEE_COUNT)
     const sql = `
