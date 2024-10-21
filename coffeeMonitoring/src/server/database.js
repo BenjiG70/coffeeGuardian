@@ -113,9 +113,10 @@ app.get('/get/yearly/coffee', (req, res) => {
     }
   )
   app.get('/get/yearly/log', (req, res) => {
-    const sql = `SELECT COUNT(STATUS) AS VALUE
-                FROM LOG 
-                WHERE strftime('%Y', TIME) = strftime('%Y', 'now')
+    const sql = `SELECT STATUS, COUNT(STATUS) AS VALUE
+                 FROM LOG 
+                 WHERE strftime('%Y', TIME) = strftime('%Y', 'now')
+                 GROUP BY STATUS;
                 `;
     getData(sql, res);
     }
