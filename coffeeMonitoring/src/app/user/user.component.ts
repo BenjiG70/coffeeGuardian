@@ -27,6 +27,9 @@ export class UserComponent implements OnInit{
       next: (data) => {
         this.unregistered = data;
         this.unregisteredArray = Object.values(this.unregistered);
+        for(let test of this.unregisteredArray){
+          console.log(test)
+        }
       }
     });
     this.db.getAllUsers().subscribe({

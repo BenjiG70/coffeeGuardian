@@ -131,6 +131,7 @@ app.get('/get/yearly/coffee', (req, res) => {
     const sql = `SELECT l.TagID, MAX(l.TIME) as TIME
                  FROM LOG l
                  LEFT JOIN USER u ON l.TagID = u.UID
+                 WHERE u.UID IS NULL
                  GROUP BY l.TagID;
                 `;
     getData(sql, res);
