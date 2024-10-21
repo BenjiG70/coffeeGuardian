@@ -124,9 +124,10 @@ app.get('/get/yearly/coffee', (req, res) => {
   ///get/unregistered/user
 
   app.get('/get/unregistered/user', (req, res) => {
-    const sql = `SELECT DISTINCT(TagID), TIME
+    const sql = `SELECT SELECT l.TagID, MAX(l.TIME)
                  FROM LOG l
                  LEFT JOIN USER u ON l.TagID = u.UID
+                 GROUP BY l.TagID;
                 `;
     getData(sql, res);
     }
