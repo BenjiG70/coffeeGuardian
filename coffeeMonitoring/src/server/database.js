@@ -103,7 +103,7 @@ app.get('/get/yearly/coffee', (req, res) => {
   )
   //get/yearly/log
   app.get('/get/monthly/log', (req, res) => {
-    const sql = `SELECT SUM(STATUS) 
+    const sql = `SELECT COUNT(STATUS) 
                 FROM LOG 
                 WHERE strftime('%Y', TIME) = strftime('%Y', 'now')
                 GROUP BY strftime('%m', TIME)
@@ -113,7 +113,7 @@ app.get('/get/yearly/coffee', (req, res) => {
     }
   )
   app.get('/get/yearly/log', (req, res) => {
-    const sql = `SELECT SUM(STATUS) AS VALUE
+    const sql = `SELECT COUNT(STATUS) AS VALUE
                 FROM LOG 
                 WHERE strftime('%Y', TIME) = strftime('%Y', 'now')
                 `;
